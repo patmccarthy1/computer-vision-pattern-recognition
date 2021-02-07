@@ -2,15 +2,10 @@ import numpy as np
 import cv2
 from matplotlib import pyplot as plt
 
-# read image
-orgS = cv2.imread('FD_01.jpg')
-# Resize image
-img = cv2.resize(orgS, (400, 450))  
-
 img_org= cv2.imread('FD_01.jpg', 0)
 img1 = cv2.resize(img_org, (400, 450)) 
 
-img_twist = cv2.imread('book_cover_rotated.jpg', 0)
+img_twist = cv2.imread('', 0)
 img2 = cv2.resize(img_twist, (400, 450))
 
 orb = cv2.ORB_create(nfeatures=500)
@@ -23,6 +18,6 @@ matches = bf.match(des1, des2)
 matches = sorted(matches, key=lambda x: x.distance)
 # draw first 50 matches
 match_img = cv2.drawMatches(img1, kp1, img2, kp2, matches[:50], None)
-cv2.imshow('Matches', match_img)
 
+cv2.imshow('Matches', match_img)
 cv2.waitKey(0)
