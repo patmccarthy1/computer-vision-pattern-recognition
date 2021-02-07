@@ -1,6 +1,8 @@
 # Links and References
 ## Task 2 - Manual Method:
 
+***PYTHON:***
+https://learnopencv.com/image-alignment-feature-based-using-opencv-c-python/
 
 
 ## Task 2 - Automatic Method:
