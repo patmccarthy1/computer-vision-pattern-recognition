@@ -2,11 +2,11 @@ import numpy as np
 import cv2
 from matplotlib import pyplot as plt
 
-# read image
-orgS = cv2.imread('FD_01.jpg')
-# Resize image
-img = cv2.resize(orgS, (400, 450))  
-
+# read image (uncomment the image you want to use)
+img = cv2.imread('HG_06.jpg')
+'''
+img = cv2.imread('HG_no_grid_01.jpg')
+'''
 ## This is the SHI-TOMASI Corner Method
 gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
@@ -23,6 +23,16 @@ kp, des = orb.detectAndCompute(gray_img, None)
 
 kp_img = cv2.drawKeypoints(img, kp, None, color=(0, 255, 0), flags=0)
 
+# Save the Results (update whether with grid or no grid)
+cv2.imwrite('ORB_grid.jpg', kp_img)
+cv2.imwrite('shi__grid.jpg', kp_img)
+
+'''
+cv2.imwrite('ORB_no_grid.jpg', kp_img)
+cv2.imwrite('shi_tomasi_no_grid.jpg', img)
+'''
+
+# Show the Images
 cv2.imshow('ORB', kp_img)
 cv2.imshow('Shi-Tomasi', img)
 cv2.waitKey(0)
