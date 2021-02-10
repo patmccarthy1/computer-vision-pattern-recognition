@@ -35,14 +35,14 @@ for fname in images:
         # Draw and display the corners
         img = cv2.drawChessboardCorners(img, (4,4), corners2, ret)
         
-        #cv2.imshow('img',img)
-        #cv2.waitKey(1000)
+        cv2.imshow('img',img)
+        cv2.waitKey(1000)
 
-        filename = "Calibration/calibration_%d.jpg"%d
-        #cv2.imwrite(filename, img)
+        filename = "results/calibration_%d.jpg"%d
+        cv2.imwrite(filename, img)
         d+=1
 
-print("Number of images used for calibration: ", d)
+print("Number of images used for calibration: ", d-1)
 cv2.destroyAllWindows()
 
 # calibration
@@ -68,8 +68,17 @@ print("\n Translation Vectors:")
 print(tvecs_reshaped) 
 '''
 
+# How accurate are the parameters?
+tot_error = 0
+for i in range(len(objpoints)):
+    imgpoints2, _ = cv2.projectPoints(objpoints[i], rvecs[i], tvecs[i], mtx, dist)
+    error = cv2.norm(imgpoints[i],imgpoints2, cv2.NORM_L2)/len(imgpoints2)
+    tot_error += error
+mean_error = tot_error/len(objpoints)
+print ("Mean error: ", mean_error)
+
 # Save camara parameters to text file
-with open('Calibration/camera_parameters.txt', 'w') as outfile:
+with open('results/camera_parameters.txt', 'w') as outfile:
     outfile.write('# Camera matrix (Intrinsic Parameters: focal length and optical centers): \n')
     np.savetxt(outfile, mtx, fmt='%-7.4f')
 
@@ -81,3 +90,20 @@ with open('Calibration/camera_parameters.txt', 'w') as outfile:
 
     outfile.write('\n# Translation Vectors (extrinsic parameters): \n')
     np.savetxt(outfile, tvecs_reshaped, fmt='%-7.4f')
+
+    outfile.write('\n# Mean error (how accurate are the parameters?): ' + str(mean_error))
+
+# In case of distortion:
+'''
+img = cv2.imread('*.jpg')
+h,  w = img.shape[:2]
+newcameramtx, roi = cv2.getOptimalNewCameraMatrix(mtx,dist,(w,h),1,(w,h))
+
+# undistort
+dst = cv2.undistort(img, mtx, dist, None, newcameramtx)
+
+# crop the image
+x,y,w,h = roi
+dst = dst[y:y+h, x:x+w]
+cv2.imwrite('undist_image.jpg',dst)
+'''
