@@ -1,6 +1,6 @@
 import cv2
  
-filedir = "C:\\Users\\maria\\OneDrive\\Documentos\\Coding\\Github\\computer-vision-pattern-recognition\\images\\Grid\\grid_01.jpg"
+filedir = "C:\\Users\\maria\\OneDrive\\Documentos\\Coding\\Github\\computer-vision-pattern-recognition\\images\\Grid\\FD_grid_only_10.jpg"
 # read image
 img = cv2.imread(filedir, cv2.IMREAD_UNCHANGED)
  
@@ -26,5 +26,5 @@ Image Width        :  378
 Number of Channels :  3
 
 
-grid_01.jpg --> /8 = 256 X 192
+grid_01.jpg --> /8 
 '''

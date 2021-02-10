@@ -13,10 +13,9 @@ objp[:,:2] = np.mgrid[0:7,0:6].T.reshape(-1,2)
 objpoints = [] # 3d point in real world space
 imgpoints = [] # 2d points in image plane.
 
-filedir = "C:\\Users\\maria\\OneDrive\\Documentos\\Coding\\Github\\computer-vision-pattern-recognition\\images\\Grid\\*.jpg"
-images = glob.glob(filedir)
+images = glob.glob('*.jpg')
 
-n = 0
+d = 0
 for fname in images:
     img = cv2.imread(fname)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -46,11 +45,13 @@ for fname in images:
 
         # Draw and display the corners
         img = cv2.drawChessboardCorners(img, (4,4), corners2,ret)
+        
         cv2.imshow('img',img)
-        cv2.waitKey(500)
 
-        r_name = 'grid_cal_' + str(n)
-        n += 1
-        cv2.imwrite(r_name, img)
+        filename = "calibration_%d.jpg"%d
+        cv2.imwrite(filename, img)
+        d+=1
+
+        cv2.waitKey(1000)
 
 cv2.destroyAllWindows()
