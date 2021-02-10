@@ -53,22 +53,27 @@ rvecs_reshaped = rvecs.reshape(rvecs.shape[0], -1)
 tvecs = np.array(tv) 
 tvecs_reshaped = tvecs.reshape(tvecs.shape[0], -1) 
 
+'''
 # Displayig required output 
 print(" Camera matrix:") 
 print(mtx) 
+
 print("\n Distortion coefficient:") 
-print(dist) 
+print(dist)
+
 print("\n Rotation Vectors:") 
 print(rvecs_reshaped) 
+
 print("\n Translation Vectors:") 
 print(tvecs_reshaped) 
+'''
 
 # Save camara parameters to text file
 with open('Calibration/camera_parameters.txt', 'w') as outfile:
-    outfile.write('# Camera matrix (includes focal length and optical centers): \n')
+    outfile.write('# Camera matrix (Intrinsic Parameters: focal length and optical centers): \n')
     np.savetxt(outfile, mtx, fmt='%-7.4f')
-    
-    outfile.write('\n# Distortion coefficients (intrinsic parameters): \n')
+
+    outfile.write('\n# Distortion coefficients: \n')
     np.savetxt(outfile, dist, fmt='%-7.4f')
 
     outfile.write('\n# Rotation Vectors (extrinsic parameters): \n')

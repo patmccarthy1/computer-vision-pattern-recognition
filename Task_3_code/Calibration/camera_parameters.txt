@@ -1,9 +1,9 @@
-# Camera matrix (includes focal length and optical centers): 
+# Camera matrix (Intrinsic Parameters: focal length and optical centers): 
 404.7797 0.0000  265.5773
 0.0000  417.2593 233.3487
 0.0000  0.0000  1.0000 
 
-# Distortion coefficients (intrinsic parameters): 
+# Distortion coefficients: 
 0.4885  -3.0033 0.0120  0.0203  4.3558 
 
 # Rotation Vectors (extrinsic parameters): 
