@@ -20,18 +20,6 @@ for fname in images:
     img = cv2.imread(fname)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-    '''
-    corners3 = cv2.goodFeaturesToTrack(gray,25,0.01,10)
-    corners3 = np.int0(corners3)
-
-    for i in corners3:
-        x,y = i.ravel()
-        cv2.circle(img,(x,y),3,(0,0,255),-1)
-
-    cv2.imshow('Corners',img)
-    cv2.waitKey(0)
-    '''
-
     # Find the chess board corners
     ret, corners = cv2.findChessboardCorners(gray, (4,4),None)
     print(ret)
@@ -47,11 +35,10 @@ for fname in images:
         img = cv2.drawChessboardCorners(img, (4,4), corners2,ret)
         
         cv2.imshow('img',img)
+        cv2.waitKey(1000)
 
         filename = "calibration_%d.jpg"%d
-        cv2.imwrite(filename, img)
+        #cv2.imwrite(filename, img)
         d+=1
-
-        cv2.waitKey(1000)
 
 cv2.destroyAllWindows()
