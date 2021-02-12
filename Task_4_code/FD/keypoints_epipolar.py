@@ -1,12 +1,14 @@
-# reference: https://docs.opencv.org/master/da/de9/tutorial_py_epipolar_geometry.html
 import numpy as np 
 import cv2 
 from matplotlib import pyplot as plt 
    
 # Load the left and right images 
 # in gray scale 
-img1 = cv2.imread('FD_no_grid_04.jpg', 0) 
-img2 = cv2.imread('FD_no_grid_07.jpg', 0)
+img1_name = 'FD_02.jpg'
+img2_name = 'FD_05.jpg'
+
+img1 = cv2.imread(img1_name, 0) 
+img2 = cv2.imread(img2_name, 0)
 
 sift = cv2.SIFT_create()
 
@@ -40,7 +42,7 @@ print(" Fundamental matrix:")
 print(FDmatrix) 
 
 # Save camara parameters to text file
-with open('results/FD_matrix_no_grid2.txt', 'w') as outfile:
+with open('results/fundamental_matrix.txt', 'w') as outfile:
     outfile.write('# Fundamental Matrix: \n')
     np.savetxt(outfile, FDmatrix)
     outfile.write('\n # Fundamental Matrix (reduced): \n')
@@ -74,6 +76,16 @@ img5,img6 = drawlines(img1,img2,lines1,pts1,pts2)
 lines2 = cv2.computeCorrespondEpilines(pts1.reshape(-1,1,2), 1,F)
 lines2 = lines2.reshape(-1,3)
 img3,img4 = drawlines(img2,img1,lines2,pts2,pts1)
+
 plt.subplot(121),plt.imshow(img5)
+plt.title(img1_name)
+ax = plt.gca()
+ax.axes.xaxis.set_visible(False)
+ax.axes.yaxis.set_visible(False)
+
 plt.subplot(122),plt.imshow(img3)
+plt.title(img2_name)
+ax = plt.gca()
+ax.axes.xaxis.set_visible(False)
+ax.axes.yaxis.set_visible(False)
 plt.show()
