@@ -1,6 +1,8 @@
+#reference: https://docs.opencv.org/master/da/de9/tutorial_py_epipolar_geometry.html
 import numpy as np 
 import cv2 
 from matplotlib import pyplot as plt 
+from scipy import linalg
    
 # Load the left and right images 
 # in gray scale 
@@ -38,8 +40,8 @@ F, mask = cv2.findFundamentalMat(pts1,pts2,cv2.FM_LMEDS)
 
 FDmatrix = np.array(F) 
 # Displayig required output 
-print(" Fundamental matrix:") 
-print(FDmatrix) 
+#print(" Fundamental matrix:") 
+#print(FDmatrix) 
 
 # Save camara parameters to text file
 with open('results/fundamental_matrix.txt', 'w') as outfile:
@@ -72,6 +74,11 @@ lines1 = cv2.computeCorrespondEpilines(pts2.reshape(-1,1,2), 2,F)
 lines1 = lines1.reshape(-1,3)
 img5,img6 = drawlines(img1,img2,lines1,pts1,pts2)
 
+cv2.imshow('img', img5)
+cv2.waitKey(0)
+cv2.imshow('img', img6)
+cv2.waitKey(0)
+
 # Find epilines corresponding to points in left image (first image) and drawing its lines on right image
 lines2 = cv2.computeCorrespondEpilines(pts1.reshape(-1,1,2), 1,F)
 lines2 = lines2.reshape(-1,3)
@@ -89,3 +96,4 @@ ax = plt.gca()
 ax.axes.xaxis.set_visible(False)
 ax.axes.yaxis.set_visible(False)
 plt.show()
+
