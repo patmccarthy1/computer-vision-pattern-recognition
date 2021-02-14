@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 
 # Load the left and right images 
 # in gray scale 
-img1_name = '../images/FD_02.jpg'
-img2_name = '../images/FD_05.jpg'
+img1_name = '../images/FD_01.jpg'
+img2_name = '../images/FD_02.jpg'
 
 img1 = cv2.imread(img1_name, 0) 
 img2 = cv2.imread(img2_name, 0)
@@ -51,8 +51,8 @@ _, H1, H2 = cv2.stereoRectifyUncalibrated(
 # Adapted from: https://stackoverflow.com/a/62607343
 img1_rectified = cv2.warpPerspective(img1, H1, (w1, h1))
 img2_rectified = cv2.warpPerspective(img2, H2, (w2, h2))
-cv2.imwrite("rectified_1.png", img1_rectified)
-cv2.imwrite("rectified_2.png", img2_rectified)
+cv2.imwrite("rectified_5.jpg", img1_rectified)
+cv2.imwrite("rectified_6.jpg", img2_rectified)
 
 # Draw the rectified images
 fig, axes = plt.subplots(1, 2, figsize=(15, 10))
@@ -63,5 +63,5 @@ axes[1].axhline(250)
 axes[0].axhline(450)
 axes[1].axhline(450)
 plt.suptitle("Rectified images")
-plt.savefig("rectified_images.png")
+plt.savefig("rectified_images2.jpg")
 plt.show()
