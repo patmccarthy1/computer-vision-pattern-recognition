@@ -2,8 +2,8 @@ import cv2
 import numpy as np
 
 # define images to be read in
-img1_name = '../images/FD_02.jpg'
-img2_name = '../images/FD_05.jpg'
+img1_name = '../images/HG_03.jpg'
+img2_name = '../images/HG_04.jpg'
 
 # read in images
 img1 = cv2.imread(img1_name, 0) 
