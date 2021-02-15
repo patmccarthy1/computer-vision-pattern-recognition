@@ -7,7 +7,7 @@ imgL = cv2.imread('rectified_8.jpg',0)
 imgR = cv2.imread('rectified_7.jpg',0)
 
 # Initialize the stereo block matching object 
-stereo = cv2.StereoBM_create(numDisparities=16, blockSize=17)
+stereo = cv2.StereoBM_create(numDisparities=16, blockSize=19)
 
 # Compute the disparity image
 disparity = stereo.compute(imgL, imgR)
