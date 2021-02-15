@@ -2,9 +2,16 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
+<<<<<<< HEAD
 # define images to be read in
 img1_name = '../images/FD_03.jpg'
 img2_name = '../images/FD_04.jpg'
+=======
+# Load the left and right images 
+# in gray scale 
+img1_name = '../images/HG_06.jpg'
+img2_name = '../images/HG_07.jpg'
+>>>>>>> d8d3a4a875e843c7b1e20cfc8022abff69458496
 
 # read in images 
 img1 = cv2.imread(img1_name, 0) 
@@ -54,8 +61,8 @@ _, H1, H2 = cv2.stereoRectifyUncalibrated(
 # rectify images
 img1_rectified = cv2.warpPerspective(img1, H1, (w1, h1))
 img2_rectified = cv2.warpPerspective(img2, H2, (w2, h2))
-cv2.imwrite("rectified_1.png", img1_rectified)
-cv2.imwrite("rectified_2.png", img2_rectified)
+cv2.imwrite("rectified-1.jpg", img1_rectified)
+cv2.imwrite("rectified-2.jpg", img2_rectified)
 
 # plot rectified images
 fig, axes = plt.subplots(1, 2, figsize=(15, 10))
@@ -66,6 +73,7 @@ axes[1].axhline(250)
 axes[0].axhline(450)
 axes[1].axhline(450)
 plt.suptitle("Rectified images")
+<<<<<<< HEAD
 plt.savefig("rectified_images.png")
 plt.show()
 
@@ -106,3 +114,7 @@ plt.show()
 #img[:img_rect1.shape[0], :img_rect1.shape[1]] = img_rect1
 #img[:img_rect2.shape[0], img_rect1.shape[1]:] = img_rect2
 
+=======
+plt.savefig("rectified_images_02-05.jpg")
+plt.show()
+>>>>>>> d8d3a4a875e843c7b1e20cfc8022abff69458496
