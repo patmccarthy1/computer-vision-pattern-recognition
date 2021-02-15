@@ -17,30 +17,34 @@ imgpoints = [] # 2d points in image plane.
 images = glob.glob('*.jpg')
 
 d = 1
-for fname in images:
-    img = cv2.imread(fname)
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-    # Find the chess board corners
-    ret, corners = cv2.findChessboardCorners(gray, (4,4),None)
-    #print(ret)
+with open('results/images_used.txt', 'w') as outfile:
+    outfile.write('Images Used in Calibration: \n')
+    for fname in images:
+        img = cv2.imread(fname)
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-    # If found, add object points, image points (after refining them)
-    if ret == True:
-        objpoints.append(objp)
+        # Find the chess board corners
+        ret, corners = cv2.findChessboardCorners(gray, (4,4),None)
+        #print(ret)
 
-        corners2 = cv2.cornerSubPix(gray,corners,(11,11),(-1,-1),criteria)
-        imgpoints.append(corners2)
+        # If found, add object points, image points (after refining them)
+        if ret == True:
+            outfile.write(str(d) + ': ' + fname + '\n')
+            objpoints.append(objp)
 
-        # Draw and display the corners
-        img = cv2.drawChessboardCorners(img, (4,4), corners2, ret)
+            corners2 = cv2.cornerSubPix(gray,corners,(11,11),(-1,-1),criteria)
+            imgpoints.append(corners2)
+
+            # Draw and display the corners
+            img = cv2.drawChessboardCorners(img, (4,4), corners2, ret)
         
-        cv2.imshow('img',img)
-        cv2.waitKey(1000)
+            cv2.imshow('img',img)
+            cv2.waitKey(1000)
 
-        filename = "results/calibration_%d.jpg"%d
-        cv2.imwrite(filename, img)
-        d+=1
+            filename = "results/calibration_%d.jpg"%d
+            cv2.imwrite(filename, img)
+            d+=1
 
 print("Number of images used for calibration: ", d-1)
 cv2.destroyAllWindows()
@@ -53,7 +57,6 @@ rvecs_reshaped = rvecs.reshape(rvecs.shape[0], -1)
 tvecs = np.array(tv) 
 tvecs_reshaped = tvecs.reshape(tvecs.shape[0], -1) 
 
-'''
 # Displayig required output 
 print(" Camera matrix:") 
 print(mtx) 
@@ -66,7 +69,6 @@ print(rvecs_reshaped)
 
 print("\n Translation Vectors:") 
 print(tvecs_reshaped) 
-'''
 
 # How accurate are the parameters?
 tot_error = 0
