@@ -1,29 +1,28 @@
 import cv2
 import numpy as np
 
-# Load the left and right images 
-# in gray scale 
+# define images to be read in
 img1_name = '../images/FD_02.jpg'
 img2_name = '../images/FD_05.jpg'
 
+# read in images
 img1 = cv2.imread(img1_name, 0) 
 img2 = cv2.imread(img2_name, 0)
 
-
-# Initiate SIFT detector
+# create SIFT object for keypoint detection and descriptor creation
 orb = cv2.ORB_create()
 
-# find the keypoints and descriptors with SIFT
+# find keypoints and descriptors with SIFT
 kp1, des1 = orb.detectAndCompute(img1,None)
 kp2, des2 = orb.detectAndCompute(img2,None)
 
-
-# create BFMatcher object
+# create BFMatcher object for descriptor matching
 bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
 
-# Match descriptors.
+# match descriptors
 matches = bf.match(des1,des2)
 
+# define function to return homography matrix
 def findHomography(image_1_kp, image_2_kp, matches):
     image_1_points = np.zeros((len(matches), 1, 2), dtype=np.float32)
     image_2_points = np.zeros((len(matches), 1, 2), dtype=np.float32)
@@ -37,4 +36,4 @@ def findHomography(image_1_kp, image_2_kp, matches):
 
     return homography
 
-H = findHomography(kp1,kp2,matches)
+H = findHomography(kp1,kp2,matches) # get homography matrix for matched keypoints
