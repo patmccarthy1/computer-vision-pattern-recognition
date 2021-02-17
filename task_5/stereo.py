@@ -2,16 +2,9 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-<<<<<<< HEAD
 # define images to be read in
 img1_name = '../images/FD_03.jpg'
 img2_name = '../images/FD_04.jpg'
-=======
-# Load the left and right images 
-# in gray scale 
-img1_name = '../images/HG_06.jpg'
-img2_name = '../images/HG_07.jpg'
->>>>>>> d8d3a4a875e843c7b1e20cfc8022abff69458496
 
 # read in images 
 img1 = cv2.imread(img1_name, 0) 
@@ -72,8 +65,10 @@ axes[0].axhline(250)
 axes[1].axhline(250)
 axes[0].axhline(450)
 axes[1].axhline(450)
-plt.suptitle("Rectified images")
-<<<<<<< HEAD
+axes[0].get_xaxis().set_visible(False)
+axes[0].get_yaxis().set_visible(False)
+axes[1].get_xaxis().set_visible(False)
+axes[1].get_yaxis().set_visible(False)
 plt.savefig("rectified_images.png")
 plt.show()
 
@@ -114,7 +109,5 @@ plt.show()
 #img[:img_rect1.shape[0], :img_rect1.shape[1]] = img_rect1
 #img[:img_rect2.shape[0], img_rect1.shape[1]:] = img_rect2
 
-=======
 plt.savefig("rectified_images_02-05.jpg")
 plt.show()
->>>>>>> d8d3a4a875e843c7b1e20cfc8022abff69458496
