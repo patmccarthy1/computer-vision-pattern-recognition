@@ -1,11 +1,10 @@
-# reference: https://www.geeksforgeeks.org/python-opencv-epipolar-geometry/
 import numpy as np 
 import cv2 
 from matplotlib import pyplot as plt 
    
 # Load the left and right images in gray scale (by adding the 0 after image name)
-img1_name = 'HG_01.jpg'
-img2_name = 'HG_02.jpg'
+img1_name = 'Capture_FD02.jpg'
+img2_name = 'FD_05.jpg'
 
 img1 = cv2.imread(img1_name, 0) 
 img2 = cv2.imread(img2_name, 0)
@@ -20,7 +19,7 @@ kp2, des2 = sift.detectAndCompute(img2, None)
 # FLANN parameters for matcher object
 FLANN_INDEX_KDTREE = 1
 index_params = dict(algorithm = FLANN_INDEX_KDTREE, trees = 5)
-search_params = dict(checks=10) # searches 50 points to match
+search_params = dict(checks=50) # searches 50 points to match
 flann = cv2.FlannBasedMatcher(index_params,search_params)
 matches = flann.knnMatch(des1,des2,k=2)
 pts1 = []
@@ -42,13 +41,6 @@ FDmatrix = np.array(F)
 # Displayig required output 
 print(" Fundamental matrix:") 
 print(FDmatrix) 
-
-# Save Fundamental Matrix to text file
-with open('results/fundamental_matrixRECT.txt', 'w') as outfile:
-    outfile.write('# Fundamental Matrix: \n')
-    np.savetxt(outfile, FDmatrix)
-    outfile.write('\n # Fundamental Matrix (reduced): \n')
-    np.savetxt(outfile, FDmatrix, fmt='%-7.4f')
 
 # We select only inlier points
 pts1 = pts1[mask.ravel()==1]
@@ -80,15 +72,10 @@ lines2 = lines2.reshape(-1,3)
 img3,img4 = drawlines(img2,img1,lines2,pts2,pts1)
 
 # Plot the resulting images using matplotlib as subplots
-plt.subplot(121),plt.imshow(img5)
+plt.imshow(img5)
 plt.title(img1_name)
 ax = plt.gca()
 ax.axes.xaxis.set_visible(False)
 ax.axes.yaxis.set_visible(False)
 
-plt.subplot(122),plt.imshow(img3)
-plt.title(img2_name)
-ax = plt.gca()
-ax.axes.xaxis.set_visible(False)
-ax.axes.yaxis.set_visible(False)
 plt.show()
