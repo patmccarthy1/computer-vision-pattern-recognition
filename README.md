@@ -1,4 +1,4 @@
-#  Computer Vision and Pattern Recognition
+#  Computer Vision and Pattern Recognition Coursework 1
 
 Computer vision and pattern recognition algorithms written for the module 'Computer Vision & Pattern Recognition' in Imperial EEE.
 
@@ -26,3 +26,7 @@ of the camera.
 ## Task 5: 3D geometry
 1. Show a stereo rectified pair of your images with epipolar lines.
 2. Calculate and display depth map of your object estimated from different views.
+
+# Authors
+- Maria Arranz Fombellida, ma8816, CID:01250685
+- Patrick McCarthy, pm4617, CID:01353165
