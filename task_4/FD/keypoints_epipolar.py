@@ -4,8 +4,8 @@ import cv2
 from matplotlib import pyplot as plt 
    
 # Load the left and right images in gray scale (by adding the 0 after image name)
-img1_name = 'FD_02.jpg'
-img2_name = 'FD_05.jpg'
+img1_name = 'rectified_02.jpg'
+img2_name = 'rectified_05.jpg'
 
 img1 = cv2.imread(img1_name, 0) 
 img2 = cv2.imread(img2_name, 0)
@@ -20,7 +20,7 @@ kp2, des2 = sift.detectAndCompute(img2, None)
 # FLANN parameters for matcher object
 FLANN_INDEX_KDTREE = 1
 index_params = dict(algorithm = FLANN_INDEX_KDTREE, trees = 5)
-search_params = dict(checks=50) # searches 50 points to match
+search_params = dict(checks=10) # searches 50 points to match
 flann = cv2.FlannBasedMatcher(index_params,search_params)
 matches = flann.knnMatch(des1,des2,k=2)
 pts1 = []
@@ -44,7 +44,7 @@ print(" Fundamental matrix:")
 print(FDmatrix) 
 
 # Save Fundamental Matrix to text file
-with open('results/fundamental_matrix.txt', 'w') as outfile:
+with open('results/fundamental_matrixRECT.txt', 'w') as outfile:
     outfile.write('# Fundamental Matrix: \n')
     np.savetxt(outfile, FDmatrix)
     outfile.write('\n # Fundamental Matrix (reduced): \n')
