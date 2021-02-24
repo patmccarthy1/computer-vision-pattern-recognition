@@ -1,6 +1,6 @@
-#  Computer Vision and Pattern Recognition Coursework 1
+#  Computer Vision Coursework
 
-Computer vision and pattern recognition algorithms written for the module 'Computer Vision & Pattern Recognition' in Imperial EEE.
+Computer vision algorithms written for the module 'Computer Vision & Pattern Recognition' in Imperial EEE.
 
 ## Task 1: Collect Data
 1. Collect a sequence of 5-10 pictures (we call it FD) with and without the object in the grid. Change the camera position between pictures.
